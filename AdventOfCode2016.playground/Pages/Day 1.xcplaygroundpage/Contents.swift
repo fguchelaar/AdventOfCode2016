@@ -22,9 +22,13 @@ enum Direction : Int {
     }
 }
 
-struct Location {
+struct Location : Equatable {
     var x : Int
     var y : Int
+    
+    public static func ==(lhs: Location, rhs: Location) -> Bool {
+        return lhs.x == rhs.x && lhs.y == rhs.y
+    }
 }
 
 var direction : Direction = .north
@@ -63,7 +67,7 @@ for var instruction in instructions {
         }
         
         if location2 == nil && visitedLocations.contains(where: { (visitedLocation) -> Bool in
-            return visitedLocation.x == location.x && visitedLocation.y == location.y
+            return visitedLocation == location
         }) {
             location2 = location
         }
