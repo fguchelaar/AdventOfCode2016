@@ -75,16 +75,14 @@ for var instruction in instructions {
     }
 }
 
-//: Part One
+//: ## Part One
 print ("After following \(instructions.count) instructions, we arrive at \(location)")
 let distance1 = abs(location.x) + abs(location.y)
 print ("The Easter Bunny HQ is \(distance1) blocks away.")
 
-//: Part Two
+//: ## Part Two
 if let actualLocation = location2 {
     print ("The first location visited twice, is \(actualLocation)")
     let distance2 = abs(actualLocation.x) + abs(actualLocation.y)
     print ("Which is \(distance2) blocks away.")
 }
-
-//: [Previous](@previous) - [Next](@next)
