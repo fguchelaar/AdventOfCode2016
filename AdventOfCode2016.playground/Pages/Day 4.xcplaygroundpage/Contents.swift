@@ -13,13 +13,6 @@ var roomStrings = input
     .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
     .components(separatedBy: CharacterSet.newlines)
 
-extension String {
-    func rangeFromNSRange(aRange: NSRange) -> Range<String.Index> {
-        let s = self.index(startIndex, offsetBy: aRange.location)
-        let e = self.index(startIndex, offsetBy: aRange.location + aRange.length)
-        return s..<e
-    }
-}
 
 extension String {
     func characterMap() -> [String : Int] {
@@ -77,20 +70,10 @@ struct Room {
         
         let characterMap = encryptedName.joined().characterMap()
         
-        
         let sorted = characterMap.sorted {a,b in
-            
-            if (a.value > b.value) {
-                return true
-            }
-            if (a.value == b.value && a.key < b.key) {
-                return true
-            }
-            else {
-                return false
-            }
+            return (a.value > b.value) || (a.value == b.value && a.key < b.key)
         }
-        
+
         var  cs = ""
         
         for idx in 0..<5 {
