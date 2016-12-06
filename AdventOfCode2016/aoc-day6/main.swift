@@ -20,7 +20,7 @@ var leastUsedCharacters = ""
 for idx in 0..<8 {
     
     let charactersAtIndex = codes.reduce("") { $0 + $1[idx] }
-    let sortedCharacterMap = charactersAtIndex.CharacterMap().sorted { $0.value > $1.value }
+    let sortedCharacterMap = charactersAtIndex.characterMap().sorted { $0.value > $1.value }
 
     mostUsedCharacters.append((sortedCharacterMap.first?.key)!)
     leastUsedCharacters.append((sortedCharacterMap.last?.key)!)

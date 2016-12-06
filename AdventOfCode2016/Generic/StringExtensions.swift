@@ -6,7 +6,7 @@ extension String {
      Returns a dictionary with all Characters of the string as keys and the number of
      occurences of that Character as value
      */
-    public func CharacterMap() -> [Character : Int] {
+    public func characterMap() -> [Character : Int] {
         let characterMap = self.characters.reduce([Character : Int](), { (result, character) -> [Character : Int] in
             var newDict = result
             newDict[character] = (newDict[character] ?? 0) + 1
