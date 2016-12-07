@@ -21,8 +21,7 @@ extension String {
             return false
         }
         
-        let lastIndex = self.index(self.endIndex, offsetBy: -3
-        )
+        let lastIndex = self.index(self.endIndex, offsetBy: -3)
         for index in self.characters.indices {
             if index == lastIndex {
                 break
@@ -87,8 +86,8 @@ for address in ipAddress {
     }
     
     // part one
-    let supernetWithABBA = supernets.reduce(false, { (result, abba) -> Bool in
-        return result || abba.containsABBA()
+    let supernetWithABBA = supernets.reduce(false, { (result, supernet) -> Bool in
+        return result || supernet.containsABBA()
     })
     
     let hypernetWithABBA = hypernets.reduce(false, { (result, hypernet) -> Bool in
