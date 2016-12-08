@@ -44,18 +44,16 @@ struct Display : CustomStringConvertible {
     }
     
     var lightsOn : Int {
-        return matrix.reduce(0, { (result, rows) -> Int in
-            return rows.reduce(result, { (result, state) -> Int in
-                return result + (state ? 1 : 0)
-            })
+        return matrix.joined().reduce(0, { (result, state) -> Int in
+            return result + (state ? 1 : 0)
         })
     }
     
     var description: String {
         return matrix.map { (column) -> String in
             return column.map { (state) -> String in
-                return state ? "#" : "."
-                }.joined(separator: " ")
+                return state ? "⬛️" : "⬜️"
+                }.joined()
             }.joined(separator: "\n").appending("\nLights on: \(lightsOn)")
     }
 }
@@ -86,7 +84,7 @@ for instruction in instructions {
     // Uncomment for mediocre animation
 //    print ("After \(instruction)")
 //    print (display)
-//    usleep(250000)
+//    usleep(100000)
 }
 
 print (display)
