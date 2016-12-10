@@ -19,22 +19,21 @@ extension String {
 
 extension String {
     
+    
     func isCompressed() -> Bool {
         return self.contains("(")
     }
     
-    func decompress() -> (Int, String) {
+    func decompress(recurse: Bool) -> Int {
+
         var subCount : Int = 0
+        
         var toDecompress = self
+        
         var i = 0
         
-        if let startAt = self.range(of: "(") {
-            subCount = self.distance(from: self.startIndex, to: startAt.lowerBound)
-            toDecompress = self.substring(from: startAt.lowerBound)
-        }
-        
-        var decompressed = ""
         var controlCode : String? = nil
+        
         while i < toDecompress.characters.count {
             
             let index = toDecompress.index(toDecompress.startIndex, offsetBy: i)
@@ -49,14 +48,22 @@ extension String {
                 let repeatCount = Int(codes[1])!
                 
                 let start = toDecompress.index(index, offsetBy: 1)
+                
                 let end = toDecompress.index(start, offsetBy: numberOfCharacters)
                 let toCopy = toDecompress.substring(with: Range(uncheckedBounds: (start, end)))
-                decompressed.append(toCopy.stringByRepeating(times: repeatCount))
+                
+                if recurse {
+                    subCount += toCopy.decompress(recurse: recurse) * repeatCount
+                }
+                else {
+                    subCount += numberOfCharacters * repeatCount
+                }
+                
                 i += numberOfCharacters
                 controlCode = nil
             default:
                 if controlCode == nil {
-                    decompressed.append(character)
+                    subCount += 1
                 }
                 else {
                     controlCode!.append(character)
@@ -64,23 +71,16 @@ extension String {
             }
             i += 1
         }
-        return (subCount,decompressed)
+        return subCount
     }
 }
 
 var input = try String(contentsOfFile: "day9/input.txt").trimmingCharacters(in: .whitespacesAndNewlines)
 
+
 // Part One:
-let part1 = input.decompress()
-print(part1.1.characters.count)
+print(input.decompress(recurse: false))
+
 
 // Part Two:
-var compressed = (0,input)
-var taly = 0
-while compressed.1.isCompressed() {
-    compressed = compressed.1.decompress()
-    taly += compressed.0
-    print (taly)
-    
-}
-print(taly + compressed.1.characters.count)
+print(input.decompress(recurse: true))
