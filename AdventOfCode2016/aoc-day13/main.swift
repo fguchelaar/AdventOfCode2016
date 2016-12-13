@@ -68,25 +68,11 @@ extension Location {
 }
 
 // I'm using Dijkstra's algorithm to calculate the shortest path, escaping when we're at the target location, or scipping new locations if we've reached a max distance. Since the grid is potentially infinite, I'm building op the Unvisited set as we traverse the maze
-
 func Dijkstra(source: Location, target: Location?, maxDistance: Int) -> [Location : Int] {
     
     func neighborsOf(location: Location) -> [Location] {
-        var neighbors = [Location]()
-        if location.up().withinBounds() && !location.up().isWall() {
-            neighbors.append(location.up())
-        }
-        if location.down().withinBounds() && !location.down().isWall() {
-            neighbors.append(location.down())
-        }
-        if location.left().withinBounds() && !location.left().isWall() {
-            neighbors.append(location.left())
-        }
-        if location.right().withinBounds() && !location.right().isWall() {
-            neighbors.append(location.right())
-        }
-        
-        return neighbors
+        return [ location.up(), location.down(), location.left(), location.right()]
+            .filter { $0.withinBounds() && !$0.isWall() }
     }
     
     var distance = [Location: Int]()
