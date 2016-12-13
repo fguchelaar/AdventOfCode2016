@@ -154,13 +154,13 @@ func displayDistanceGrid(distance: [Location : Int]) {
             let loc = Location(x: col, y: row)
             
             if loc.isWall() {
-                grid.append("◦◦◦ ")
+                grid.append("◦◦ ")
             }
             else if let dist = distance[loc] {
-                grid.append(String.init(format: "%03d ", dist))
+                grid.append(String.init(format: "%02d ", dist))
             }
             else {
-                grid.append("    ")
+                grid.append("   ")
             }
         }
         grid.append("\n")
@@ -173,13 +173,19 @@ let input = 1358
 
 // Part One
 let target = Location(x: 31, y: 39)
-let distance1 = Dijkstra(source: Location(x: 1, y: 1), target: target, maxDistance: Int.max)
+var distance1 = [Location : Int]()
+measure {
+    distance1 = Dijkstra(source: Location(x: 1, y: 1), target: target, maxDistance: Int.max)
+}
 displayDistanceGrid(distance: distance1)
 print ("Arrived at \(target), after \(distance1[target]!) steps\n")
 
 // Part Two
-let maxDistance = 150
-let distance2 = Dijkstra(source: Location(x: 1, y: 1), target: nil, maxDistance: maxDistance)
+let maxDistance = 50
+var distance2 = [Location : Int]()
+measure {
+    distance2 = Dijkstra(source: Location(x: 1, y: 1), target: nil, maxDistance: maxDistance)
+}
 displayDistanceGrid(distance: distance2)
 print ("Found \(distance2.count) locations with max \(maxDistance) steps")
 
