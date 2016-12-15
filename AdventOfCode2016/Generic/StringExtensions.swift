@@ -56,4 +56,17 @@ extension String {
         
         return digestData
     }
+    
+    func md5_2() -> String {
+        let length = Int(CC_MD5_DIGEST_LENGTH)
+        var digest = [UInt8](repeating: 0, count: length)
+        
+        if let d = self.data(using: String.Encoding.utf8) {
+            _ = d.withUnsafeBytes { (body: UnsafePointer<UInt8>) in
+                CC_MD5(body, CC_LONG(d.count), &digest)
+            }
+        }
+        return digest.map { String.init(format: "%02x", $0) }.joined()
+    }
 }
+

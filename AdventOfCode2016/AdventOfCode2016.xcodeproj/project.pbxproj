@@ -21,6 +21,7 @@
 		013B67A91E015168000D9D7F /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B67A71E015137000D9D7F /* DataExtensions.swift */; };
 		013B67AA1E01516B000D9D7F /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B67A71E015137000D9D7F /* DataExtensions.swift */; };
 		013B67AB1E01516E000D9D7F /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E8001DF75D8C000B27E1 /* StringExtensions.swift */; };
+		013B67AD1E015815000D9D7F /* Measure.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01AE0EBB1E00851000777738 /* Measure.swift */; };
 		0151E8011DF75D8C000B27E1 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E8001DF75D8C000B27E1 /* StringExtensions.swift */; };
 		0151E8091DF75EC0000B27E1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E8081DF75EC0000B27E1 /* main.swift */; };
 		0151E8141DF75ECB000B27E1 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E8131DF75ECB000B27E1 /* main.swift */; };
@@ -861,6 +862,7 @@
 			files = (
 				013B67AB1E01516E000D9D7F /* StringExtensions.swift in Sources */,
 				013B67A31E0150FE000D9D7F /* main.swift in Sources */,
+				013B67AD1E015815000D9D7F /* Measure.swift in Sources */,
 				013B67AA1E01516B000D9D7F /* DataExtensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1112,6 +1114,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = LU4EN4MKCR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -1326,6 +1329,7 @@
 				013B67A51E0150FE000D9D7F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0151E80A1DF75EC0000B27E1 /* Build configuration list for PBXNativeTarget "aoc-day2" */ = {
 			isa = XCConfigurationList;
