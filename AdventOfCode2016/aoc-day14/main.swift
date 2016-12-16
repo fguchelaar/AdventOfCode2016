@@ -11,13 +11,11 @@ import Foundation
 extension String {
     
     func tripletCharacter() -> Character? {
-        
         let lastIndex = self.index(self.endIndex, offsetBy: -2)
         for index in self.characters.indices {
             if index == lastIndex {
                 break
             }
-            
             if self.characters[index] == self.characters[self.index(index, offsetBy: 1)]
                 && self.characters[index] == self.characters[self.index(index, offsetBy: 2)] {
                 return characters[index]
@@ -41,11 +39,10 @@ func hashFor(index: Int, or string: String, stretched stretchCount: Int) -> Stri
         return hash
     }
     else {
-        var hash = ""
+        var hash = string.md5_2()
         autoreleasepool {
-            hash = string.md5_2()
             for _ in 0..<stretchCount {
-                hash = hash.md5_2().lowercased()
+                hash = hash.md5_2()
             }
         }
         hashDict[index] = hash
@@ -54,31 +51,24 @@ func hashFor(index: Int, or string: String, stretched stretchCount: Int) -> Stri
 }
 
 func findKeys(base: String, numberOfKeys: Int, stretchCount: Int) -> [Candidate] {
-    
     var keys = [Candidate]()
-    while keys.count != numberOfKeys {
-        for salt in 0..<Int.max {
-            let hash = hashFor(index: salt, or: "\(base)\(salt)", stretched: stretchCount)
-            if let character = hash.tripletCharacter() {
-
-                let quintuple = String([Character](repeatElement(character, count: 5)))
-                for i in 1...1000 {
-                    let checkHash = hashFor(index: salt+i, or: "\(base)\(salt+i)", stretched: stretchCount)
-                    
-                    if checkHash.contains(quintuple) {
-                        let candidate = Candidate(index: salt, character: character, hash: hash)
-                        keys.append(candidate)
-                        print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
-                        if keys.count == numberOfKeys {
-                            return keys
-                        }
-                        break
-                    }
-                }
+    for salt in 0..<Int.max {
+        let hash = hashFor(index: salt, or: "\(base)\(salt)", stretched: stretchCount)
+        if let character = hash.tripletCharacter() {
+            //            print ("\(salt): FOUND \(character) in \(hash)")
+            let quintuple = String([Character](repeatElement(character, count: 5)))
+            for i in 1...1000 {
+                let checkHash = hashFor(index: salt+i, or: "\(base)\(salt+i)", stretched: stretchCount)
                 
-                // we can remove the checked hash, it's the first one and will never be checked again
+                if checkHash.contains(quintuple) {
+                    let candidate = Candidate(index: salt, character: character, hash: hash)
+                    keys.append(candidate)
+                    if keys.count == numberOfKeys {
+                        return keys
+                    }
+                    break
+                }
             }
-            hashDict.removeValue(forKey: salt)
         }
     }
     return keys
@@ -94,6 +84,7 @@ measure {
 }
 
 // Part Two
+hashDict.removeAll()
 measure {
     for (index, candidate) in findKeys(base: input, numberOfKeys: 64, stretchCount: 2016).sorted(by: { $0.index < $1.index }).enumerated() {
         print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
