@@ -10,7 +10,7 @@ import Foundation
 
 extension String {
     
-    func firstCharacter(timesOccuring times: Int) -> Character? {
+    func tripletCharacter() -> Character? {
         
         let lastIndex = self.index(self.endIndex, offsetBy: -2)
         for index in self.characters.indices {
@@ -33,66 +33,69 @@ struct Candidate {
     let hash : String
 }
 
-func findKeys(base: String, numberOfKeys: Int, stretchCount: Int) -> [Candidate] {
+var hashDict = [Int : String]()
+
+func hashFor(index: Int, or string: String, stretched stretchCount: Int) -> String {
     
-    var candidates = [Candidate]()
-    var keys = [Candidate]()
-    
-   for salt in 0..<Int.max {
-        
+    if let hash = hashDict[index] {
+        return hash
+    }
+    else {
         var hash = ""
         autoreleasepool {
-            
-            hash = "\(base)\(salt)".md5_2()
+            hash = string.md5_2()
             for _ in 0..<stretchCount {
                 hash = hash.md5_2().lowercased()
             }
         }
-        
-        // 1. purge 'old' candidates and candidates already marked as one-time pad
-        candidates = candidates
-            .filter({ candidate -> Bool in
-                return salt - candidate.index <= 1000 && !keys.contains{ $0.index == candidate.index }
-            })
-        
-        // 2. search for one-time pads in candidates
-        for candidate in candidates {
-            
-            // TODO: find nice way to generate the string of 5 repeating characters 
-            if hash.contains("\(candidate.character)\(candidate.character)\(candidate.character)\(candidate.character)\(candidate.character)") {
-                keys.append(candidate)
-                print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
-                if keys.count == numberOfKeys {
-                    return keys
+        hashDict[index] = hash
+        return hash
+    }
+}
+
+func findKeys(base: String, numberOfKeys: Int, stretchCount: Int) -> [Candidate] {
+    
+    var keys = [Candidate]()
+    while keys.count != numberOfKeys {
+        for salt in 0..<Int.max {
+            let hash = hashFor(index: salt, or: "\(base)\(salt)", stretched: stretchCount)
+            if let character = hash.tripletCharacter() {
+
+                let quintuple = String([Character](repeatElement(character, count: 5)))
+                for i in 1...1000 {
+                    let checkHash = hashFor(index: salt+i, or: "\(base)\(salt+i)", stretched: stretchCount)
+                    
+                    if checkHash.contains(quintuple) {
+                        let candidate = Candidate(index: salt, character: character, hash: hash)
+                        keys.append(candidate)
+                        print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
+                        if keys.count == numberOfKeys {
+                            return keys
+                        }
+                        break
+                    }
                 }
+                
+                // we can remove the checked hash, it's the first one and will never be checked again
             }
-        }
-        
-        if let character = hash.firstCharacter(timesOccuring: 3) {
-            candidates.append(Candidate(index: salt, character: character, hash: hash))
+            hashDict.removeValue(forKey: salt)
         }
     }
     return keys
 }
 
 let input = "ngcjuoqr"
-//let input = "abc"
 
 // Part One
-//measure {
-//    for (index, candidate) in findKeys(base: input, numberOfKeys: 64, stretchCount: 0).sorted(by: { $0.index < $1.index }).enumerated() {
-//        print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
-//    }
-//}
-
-
-// Part Two
 measure {
-    for (index, candidate) in findKeys(base: input, numberOfKeys: 80, stretchCount: 2016).sorted(by: { $0.index < $1.index }).enumerated() {
+    for (index, candidate) in findKeys(base: input, numberOfKeys: 64, stretchCount: 0).sorted(by: { $0.index < $1.index }).enumerated() {
         print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
     }
 }
 
-// #1: 20219 x
-// #2: 20199 x
-// #3: 20092 √
+// Part Two
+measure {
+    for (index, candidate) in findKeys(base: input, numberOfKeys: 64, stretchCount: 2016).sorted(by: { $0.index < $1.index }).enumerated() {
+        print (String.init(format: "%02d [%@] %@", candidate.index, String(candidate.character), candidate.hash))
+    }
+}
