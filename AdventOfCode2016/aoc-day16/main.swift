@@ -8,62 +8,39 @@
 
 import Foundation
 
-extension String {
-    
-    func dragonCurve() -> String {
-        var b = String(self.characters.reversed())
-        b = b.replacingOccurrences(of: "0", with: "#")
-        b = b.replacingOccurrences(of: "1", with: "0")
-        b = b.replacingOccurrences(of: "#", with: "1")
-        return "\(self)0\(b)"
-    }
-}
-
-extension String {
-    func checksum() -> String {
-        
-        var checksum = ""
-        for start in stride(from: 0, to: self.characters.count, by: 2) {
-            let startIdx = self.index(self.startIndex, offsetBy: start)
-            let endIdx =  self.index(after: startIdx)
-            if self.characters[startIdx] == self.characters[endIdx] {
-                checksum.append("1")
-            }
-            else {
-                checksum.append("0")
-            }
+extension Collection where Iterator.Element == Bool {
+    func dragonCurve(length: Int) -> Array<Bool> {
+        let selfAsArray = (self as! [Bool])
+        let dragonCurve = selfAsArray + [false] + selfAsArray.reversed().map{ !$0 }
+        if dragonCurve.count < length {
+            return dragonCurve.dragonCurve(length: length)
         }
-        
-        if checksum.characters.count % 2 == 0 {
+        return [Bool](dragonCurve.prefix(length))
+    }
+    
+    func checksum() -> Array<Bool> {
+        let selfAsArray = (self as! [Bool])
+        var checksum = [Bool](repeating: false, count: selfAsArray.count/2)
+        for idx in stride(from: 0, to: selfAsArray.count, by: 2) {
+            checksum[idx/2] = (selfAsArray[idx] == selfAsArray[idx.advanced(by: 1)])
+        }
+        if checksum.count % 2 == 0 {
             return checksum.checksum()
         }
         return checksum
     }
 }
 
+var input = "10001001100000001".characters.map { $0 == "1" }
+
 // Part One
 print("--- PART ONE ---")
-var input = "10001001100000001"
-var length = 272
 measure {
-    while input.characters.count < length {
-        input = input.dragonCurve()
-    }
-}
-measure {
-    input = input.substring(to: input.index(input.startIndex, offsetBy: length))
-    print ("Checksum: \(input.checksum())")
+    print ("Checksum: \(input.dragonCurve(length: 272).checksum().map { $0 ? "1" : "0" }.joined())")
 }
 
 // Part Two
-print("--- PART ONE ---")
-length = 35651584
+print("--- PART TWO ---")
 measure {
-    while input.characters.count < length {
-        input = input.dragonCurve()
-    }
-}
-measure {
-    input = input.substring(to: input.index(input.startIndex, offsetBy: length))
-    print ("Checksum: \(input.checksum())")
+    print ("Checksum: \(input.dragonCurve(length: 35651584).checksum().map { $0 ? "1" : "0" }.joined())")
 }

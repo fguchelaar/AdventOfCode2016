@@ -1419,7 +1419,7 @@
 			buildSettings = {
 				DEVELOPMENT_TEAM = LU4EN4MKCR;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
