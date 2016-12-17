@@ -14,36 +14,38 @@ struct Location : Equatable, Hashable {
     var path : String
     
     func neighborsUsing(passcode: String) -> [Location] {
-        let hash = (passcode + path).md5_2()[0..<4]
         
-        var neighbors = [Location]()
-        
-        var index = hash.startIndex
-        if isValidDirection(character: hash.characters[index]) {
-            if up().withinBounds() {
-                neighbors.append(up())
+        return autoreleasepool { () -> [Location] in
+            let hash = (passcode + path).md5_2()[0..<4]
+            
+            var neighbors = [Location]()
+            
+            var index = hash.startIndex
+            if isValidDirection(character: hash.characters[index]) {
+                if up().withinBounds() {
+                    neighbors.append(up())
+                }
             }
-        }
-        index = hash.index(after: index)
-        if isValidDirection(character: hash.characters[index]) {
-            if down().withinBounds() {
-                neighbors.append(down())
+            index = hash.index(after: index)
+            if isValidDirection(character: hash.characters[index]) {
+                if down().withinBounds() {
+                    neighbors.append(down())
+                }
             }
-        }
-        index = hash.index(after: index)
-        if isValidDirection(character: hash.characters[index]) {
-            if left().withinBounds() {
-                neighbors.append(left())
+            index = hash.index(after: index)
+            if isValidDirection(character: hash.characters[index]) {
+                if left().withinBounds() {
+                    neighbors.append(left())
+                }
             }
-        }
-        index = hash.index(after: index)
-        if isValidDirection(character: hash.characters[index]) {
-            if right().withinBounds() {
-                neighbors.append(right())
+            index = hash.index(after: index)
+            if isValidDirection(character: hash.characters[index]) {
+                if right().withinBounds() {
+                    neighbors.append(right())
+                }
             }
+            return neighbors
         }
-        return neighbors
-        
     }
     
     public static func ==(lhs: Location, rhs: Location) -> Bool {
@@ -96,14 +98,14 @@ func Dijkstra(source: Location, target: Location, passcode: String, breakOnTarge
     unvisited.insert(source)
     
     while !unvisited.isEmpty {
-
+        
         let current = distance
             .filter { unvisited.contains($0.key) }
             .sorted { $0.value < $1.value }
             .first!.key
         
         visited.insert(unvisited.remove(current)!)
-
+        
         if current.x == target.x && current.y == target.y {
             if breakOnTarget {
                 break
