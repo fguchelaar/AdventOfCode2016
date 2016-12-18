@@ -22,9 +22,9 @@ extension String {
         return self[self.index(self.startIndex, offsetBy: i)]
     }
     
-    subscript (i: Int) -> String {
-        return String(self[i] as Character)
-    }
+//    subscript (i: Int) -> String {
+//        return String(self[i] as Character)
+//    }
     
     subscript (r: Range<Int>) -> String {
         let start = self.index(startIndex, offsetBy:r.lowerBound)
@@ -69,4 +69,3 @@ extension String {
         return digest.map { String.init(format: "%02x", $0) }.joined()
     }
 }
-
