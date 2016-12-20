@@ -39,8 +39,6 @@ measure {
     var low = 0
     var high = 4294967295
     
-    print ("Total of ranges: \(ranges.count)")
-    
     var sum = 0
     for (idx, range) in ranges.enumerated() {
 
