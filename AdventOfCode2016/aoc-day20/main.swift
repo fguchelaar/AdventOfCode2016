@@ -29,25 +29,23 @@ measure {
             print ("1) \(low + 1)");
             break
         }
-        else {
-            low = max(low, range.high)
-        }
+        low = max(low, range.high)
     }
 }
 
 measure {
     var low = 0
-    var high = 4294967295
+    let high = 4294967295
     
     var sum = 0
-    for (idx, range) in ranges.enumerated() {
-
+    for range in ranges {
+        
         if range.low > low+1 {
             sum += range.low - (low+1)
         }
         low = max(low, range.high)
     }
-    // add difference between high and high of highest range
+    // add difference between high and high of the highest range
     let highest = ranges.sorted { $0.high > $1.high}.first!
     sum += high - highest.high
     
