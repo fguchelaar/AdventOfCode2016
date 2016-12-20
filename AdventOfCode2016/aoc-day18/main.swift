@@ -8,29 +8,21 @@
 
 import Foundation
 
-var input = ".^^..^...^..^^.^^^.^^^.^^^^^^.^.^^^^.^^.^^^^^^.^...^......^...^^^..^^^.....^^^^^^^^^....^^...^^^^..^"
-
 let safe = Character(".")
 let trap = Character("^")
 
-extension String {
-    
-    subscript (i: Int) -> Character {
-        return self[self.index(self.startIndex, offsetBy: i)]
-    }
-    
-}
+var input = ".^^..^...^..^^.^^^.^^^.^^^^^^.^.^^^^.^^.^^^^^^.^...^......^...^^^..^^^.....^^^^^^^^^....^^...^^^^..^".characters.map { $0==trap }
 
-func isTrap(at position: Int, andPreviousRow previousRow: String) -> Bool {
+func isTrap(at position: Int, andPreviousRow previousRow: [Bool]) -> Bool {
     
-    if position < 0 || position >= previousRow.characters.count {
+    if position < 0 || position >= previousRow.count {
         return false
     }
     
-    return previousRow[position] == trap
+    return previousRow[position]
 }
 
-func tileForRow(at position: Int, andPreviousRow previousRow: String) -> Character {
+func tileForRow(at position: Int, andPreviousRow previousRow: [Bool]) -> Bool {
     let left = isTrap(at: position-1, andPreviousRow: previousRow)
     let center = isTrap(at: position, andPreviousRow: previousRow)
     let right = isTrap(at: position+1, andPreviousRow: previousRow)
@@ -38,30 +30,30 @@ func tileForRow(at position: Int, andPreviousRow previousRow: String) -> Charact
     return (left && center && !right)
         || (!left && center && right)
         || (left && !center && !right)
-        || (!left && !center && right) ? trap : safe
+        || (!left && !center && right)
 }
 
-func expandMap(firstRow: String, rows: Int) -> [String] {
+func expandMap(firstRow: [Bool], rows: Int) -> [[Bool]] {
     
-    let count = firstRow.characters.count
+    let count = firstRow.count
     
-    var map = Array<String>(repeating: "", count: rows)
-    map[0] = firstRow
+    var map = [[Bool]]()
+    map.append(firstRow)
     for r in 1..<rows { // row 0 is the starting row
-        var newRow = ""
+        var newRow = [Bool]()
         let previousRow = map[r-1]
         for i in 0..<count {
             newRow.append(tileForRow(at: i, andPreviousRow: previousRow))
         }
-        map[r] = newRow
+        map.append(newRow)
     }
     return map
 }
 
 measure {
-    print (expandMap(firstRow: input, rows: 40).joined().characters.filter { $0 == safe }.count)
+    print (expandMap(firstRow: input, rows: 40).joined().filter { !$0 }.count)
 }
 
 measure {
-    print (expandMap(firstRow: input, rows: 400000).joined().characters.filter { $0 == safe }.count)
+    print (expandMap(firstRow: input, rows: 400000).joined().filter { !$0 }.count)
 }
