@@ -81,3 +81,34 @@ measure {
         }
     }
 }
+
+
+/* Both as a function...
+ 
+func log(val: Double, forBase base: Double) -> Double {
+    return log(val) / log(base)
+}
+
+func partOne(elfCount: Int) -> Int {
+    let power = Int(pow(2, floor(log2(Double(elfCount)))))
+    return (elfCount - power) * 2 + 1;
+}
+
+func partTwo(elfCount: Int) -> Int {
+    let power = Int(pow(3, floor(log(val:Double(elfCount), forBase: 3))))
+    
+    if power == elfCount {
+        return elfCount
+    }
+    else if (2 * power - elfCount > 0) {
+        return elfCount - power
+    }
+    else {
+        return 2 * elfCount - 3 * power
+    }
+}
+
+partOne(elfCount: 3012210)
+partTwo(elfCount: 3012210)
+
+*/
