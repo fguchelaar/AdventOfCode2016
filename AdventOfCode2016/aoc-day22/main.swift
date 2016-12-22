@@ -41,7 +41,7 @@ var sum = 0
 for a in nodes {
     for b in nodes{
         if a.path != b.path
-         && a.used != 0
+            && a.used != 0
             && a.used <= b.avail {
             sum += 1
         }
@@ -62,10 +62,10 @@ for x in 0...31 {
 }
 
 var description = grid.map { (column) -> String in
-        return column.map { (node) -> String in
-            return String(format: "%02dT/%02dT", node.used, node.size)
-            }.joined(separator: "\t")
-        }.joined(separator: "\n")
+    return column.map { (node) -> String in
+        return String(format: "%02dT/%02dT", node.used, node.size)
+        }.joined(separator: "\t")
+    }.joined(separator: "\n")
 
 print (description)
 
