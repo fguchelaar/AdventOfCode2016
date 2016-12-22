@@ -17,6 +17,9 @@
 		01357B6D1DF61EE80090EFDC /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01357B6C1DF61EBF0090EFDC /* input.txt */; };
 		01357B751DF6A83B0090EFDC /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01357B741DF6A83B0090EFDC /* main.swift */; };
 		01357B7A1DF6A8860090EFDC /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 01357B791DF6A86B0090EFDC /* input.txt */; };
+		013B12FA1E0BDDBF002DAD24 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B12F91E0BDDBF002DAD24 /* main.swift */; };
+		013B12FF1E0BDDD9002DAD24 /* input.txt in CopyFiles */ = {isa = PBXBuildFile; fileRef = 013B12FE1E0BDDCE002DAD24 /* input.txt */; };
+		013B13001E0BE115002DAD24 /* StringExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0151E8001DF75D8C000B27E1 /* StringExtensions.swift */; };
 		013B67A31E0150FE000D9D7F /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B67A21E0150FE000D9D7F /* main.swift */; };
 		013B67A91E015168000D9D7F /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B67A71E015137000D9D7F /* DataExtensions.swift */; };
 		013B67AA1E01516B000D9D7F /* DataExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 013B67A71E015137000D9D7F /* DataExtensions.swift */; };
@@ -102,6 +105,16 @@
 			dstSubfolderSpec = 16;
 			files = (
 				01357B7A1DF6A8860090EFDC /* input.txt in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		013B12F51E0BDDBF002DAD24 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = day22;
+			dstSubfolderSpec = 16;
+			files = (
+				013B12FF1E0BDDD9002DAD24 /* input.txt in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,6 +288,9 @@
 		01357B721DF6A83B0090EFDC /* aoc-day6 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "aoc-day6"; sourceTree = BUILT_PRODUCTS_DIR; };
 		01357B741DF6A83B0090EFDC /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		01357B791DF6A86B0090EFDC /* input.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
+		013B12F71E0BDDBF002DAD24 /* aoc-day22 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "aoc-day22"; sourceTree = BUILT_PRODUCTS_DIR; };
+		013B12F91E0BDDBF002DAD24 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		013B12FE1E0BDDCE002DAD24 /* input.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = input.txt; sourceTree = "<group>"; };
 		013B67A01E0150FE000D9D7F /* aoc-day14 */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "aoc-day14"; sourceTree = BUILT_PRODUCTS_DIR; };
 		013B67A21E0150FE000D9D7F /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		013B67A71E015137000D9D7F /* DataExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataExtensions.swift; sourceTree = "<group>"; };
@@ -347,6 +363,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		01357B6F1DF6A83B0090EFDC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		013B12F41E0BDDBF002DAD24 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -502,6 +525,7 @@
 				017D48B11E08111600562037 /* aoc-day19 */,
 				017D48C01E09556E00562037 /* aoc-day20 */,
 				018641221E0B102A00900D2A /* aoc-day21 */,
+				013B12F81E0BDDBF002DAD24 /* aoc-day22 */,
 				01357B451DF5B0B30090EFDC /* Products */,
 			);
 			sourceTree = "<group>";
@@ -529,6 +553,7 @@
 				017D48B01E08111600562037 /* aoc-day19 */,
 				017D48BF1E09556E00562037 /* aoc-day20 */,
 				018641211E0B102A00900D2A /* aoc-day21 */,
+				013B12F71E0BDDBF002DAD24 /* aoc-day22 */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -557,6 +582,15 @@
 				01357B741DF6A83B0090EFDC /* main.swift */,
 			);
 			path = "aoc-day6";
+			sourceTree = "<group>";
+		};
+		013B12F81E0BDDBF002DAD24 /* aoc-day22 */ = {
+			isa = PBXGroup;
+			children = (
+				013B12FE1E0BDDCE002DAD24 /* input.txt */,
+				013B12F91E0BDDBF002DAD24 /* main.swift */,
+			);
+			path = "aoc-day22";
 			sourceTree = "<group>";
 		};
 		013B67A11E0150FE000D9D7F /* aoc-day14 */ = {
@@ -779,6 +813,23 @@
 			name = "aoc-day6";
 			productName = "aoc-day6";
 			productReference = 01357B721DF6A83B0090EFDC /* aoc-day6 */;
+			productType = "com.apple.product-type.tool";
+		};
+		013B12F61E0BDDBF002DAD24 /* aoc-day22 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 013B12FD1E0BDDBF002DAD24 /* Build configuration list for PBXNativeTarget "aoc-day22" */;
+			buildPhases = (
+				013B12F31E0BDDBF002DAD24 /* Sources */,
+				013B12F41E0BDDBF002DAD24 /* Frameworks */,
+				013B12F51E0BDDBF002DAD24 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "aoc-day22";
+			productName = "aoc-day22";
+			productReference = 013B12F71E0BDDBF002DAD24 /* aoc-day22 */;
 			productType = "com.apple.product-type.tool";
 		};
 		013B679F1E0150FE000D9D7F /* aoc-day14 */ = {
@@ -1084,6 +1135,11 @@
 						DevelopmentTeam = LU4EN4MKCR;
 						ProvisioningStyle = Automatic;
 					};
+					013B12F61E0BDDBF002DAD24 = {
+						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = LU4EN4MKCR;
+						ProvisioningStyle = Automatic;
+					};
 					013B679F1E0150FE000D9D7F = {
 						CreatedOnToolsVersion = 8.2;
 						DevelopmentTeam = LU4EN4MKCR;
@@ -1199,6 +1255,7 @@
 				017D48AF1E08111600562037 /* aoc-day19 */,
 				017D48BE1E09556E00562037 /* aoc-day20 */,
 				018641201E0B102A00900D2A /* aoc-day21 */,
+				013B12F61E0BDDBF002DAD24 /* aoc-day22 */,
 			);
 		};
 /* End PBXProject section */
@@ -1238,6 +1295,15 @@
 			files = (
 				0151E8011DF75D8C000B27E1 /* StringExtensions.swift in Sources */,
 				01357B751DF6A83B0090EFDC /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		013B12F31E0BDDBF002DAD24 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				013B13001E0BE115002DAD24 /* StringExtensions.swift in Sources */,
+				013B12FA1E0BDDBF002DAD24 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1550,6 +1616,24 @@
 			name = Debug;
 		};
 		01357B781DF6A83B0090EFDC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = LU4EN4MKCR;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		013B12FB1E0BDDBF002DAD24 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				DEVELOPMENT_TEAM = LU4EN4MKCR;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		013B12FC1E0BDDBF002DAD24 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEVELOPMENT_TEAM = LU4EN4MKCR;
@@ -1907,6 +1991,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		013B12FD1E0BDDBF002DAD24 /* Build configuration list for PBXNativeTarget "aoc-day22" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				013B12FB1E0BDDBF002DAD24 /* Debug */,
+				013B12FC1E0BDDBF002DAD24 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		013B67A61E0150FE000D9D7F /* Build configuration list for PBXNativeTarget "aoc-day14" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -2013,6 +2105,7 @@
 				018641261E0B102A00900D2A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		01AE0EBA1E002CC400777738 /* Build configuration list for PBXNativeTarget "aoc-day13" */ = {
 			isa = XCConfigurationList;
